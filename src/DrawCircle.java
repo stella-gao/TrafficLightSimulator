@@ -9,24 +9,49 @@ import java.awt.geom.*;
 import javax.swing.JApplet;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
-public class DrawCircle extends Frame{
-	Color color;
+public class DrawCircle extends JFrame{
+	int id;
 	
-	public DrawCircle(Color c){
-		color = c;
+	public DrawCircle(int category) {
+		id = category;
 	}
 	
   public void paint(Graphics g) {
-	  
-	  fillRed(g);
-	  drawOrange(g);
-	  drawGreen(g);
+	  switch (id) {
+		case 1:
+			
+			fillRed(g);
+			drawOrange(g);
+			drawGreen(g);
+			break;
+		case 2:
+			fillRed(g);
+			fillOrange(g);
+			drawGreen(g);
+			break;
+		case 3:
+			drawRed(g);
+			drawOrange(g);
+			fillGreen(g);
+			break;
+		case 4:
+			drawRed(g);
+			fillOrange(g);
+			fillGreen(g);
+			break;
+		
+		default:
+			break;
+	  }
 
   }
   
+  
+  
   public void fillRed(Graphics g){
-	  Graphics2D ga = (Graphics2D)g;
+	  	Graphics2D ga = (Graphics2D)g;
 	     ga.setPaint(Color.RED);
 	     ga.fillOval(150,150,100,100);
   }
@@ -44,7 +69,13 @@ public class DrawCircle extends Frame{
 	     ga2.fillOval(150,300,100,100);
   }
   
-  public void drawOrange(Graphics g){
+  public void repaint() {
+	super.repaint();
+}
+
+
+
+public void drawOrange(Graphics g){
 	  Graphics2D ga2 = (Graphics2D)g;
 	     ga2.setPaint(Color.ORANGE);
 	     ga2.drawOval(150,300,100,100);
@@ -65,27 +96,18 @@ public class DrawCircle extends Frame{
   
   
   
+  public void setUpDrawer(DrawCircle c){
+    c.addWindowListener( new WindowAdapter() {
+         public void windowClosing(WindowEvent we) {
+            System.exit(0);
+         }
+  	  });
+            
+    c.setSize(400, 900);
+    
+    c.setVisible(true);
+  }
   
-  public static void main(String args[]) 
-  {
-
-      DrawCircle circle1 = new DrawCircle(Color.GREEN);   
-//      DrawCircle frame2 = new DrawCircle(Color.GREEN);   
-      
-      circle1.addWindowListener(
-    	  new WindowAdapter() {
-	         public void windowClosing(WindowEvent we)
-	         {
-	            System.exit(0);
-	         }
-    	  }
-	  );
-      
-           
-      circle1.setSize(400, 400);
-      
-      
-      circle1.setVisible(true);
-      
-   }
+  
+  
 }
